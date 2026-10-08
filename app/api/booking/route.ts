@@ -1,0 +1,3 @@
+import {NextResponse} from 'next/server';import {z} from 'zod';
+const booking=z.object({name:z.string().min(2).max(100),phone:z.string().min(6).max(30),treatment:z.string().min(2),dateTime:z.string().min(5),message:z.string().max(1000).optional()});
+export async function POST(req:Request){try{const data=booking.parse(await req.json());/* TODO: send data through a transactional email provider. Keep credentials server-only. */console.info('Validated booking request',data.treatment);return NextResponse.json({ok:true})}catch{return NextResponse.json({ok:false,error:'Please check the required fields.'},{status:400})}}

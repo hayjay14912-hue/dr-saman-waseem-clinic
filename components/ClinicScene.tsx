@@ -1,0 +1,4 @@
+'use client';
+import {Canvas,useFrame} from '@react-three/fiber';import {MeshTransmissionMaterial} from '@react-three/drei';import {useRef} from 'react';import type {Mesh} from 'three';
+function Orb(){const ref=useRef<Mesh>(null);useFrame(({clock,mouse})=>{if(ref.current){ref.current.rotation.y=clock.elapsedTime*.18+mouse.x*.25;ref.current.rotation.x=clock.elapsedTime*.1+mouse.y*.18;ref.current.position.y=Math.sin(clock.elapsedTime*.55)*.14}});return <mesh ref={ref} position={[1.5,0,0]}><icosahedronGeometry args={[1.5,4]}/><MeshTransmissionMaterial color="#d6aa96" transmission={.75} roughness={.14} thickness={1.6} iridescence={.65}/></mesh>}
+export function ClinicScene(){return <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 opacity-80"><Canvas camera={{position:[0,0,7],fov:35}} dpr={[1,1.5]}><ambientLight intensity={1.5}/><pointLight position={[3,3,4]} intensity={20} color="#f5c9b4"/><Orb/></Canvas></div>}

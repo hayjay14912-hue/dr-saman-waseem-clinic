@@ -1,0 +1,1 @@
+import type {MetadataRoute} from 'next';import {treatments} from '@/lib/data';export default function sitemap():MetadataRoute.Sitemap{const base='https://[YOUR-VERCEL-DOMAIN]';return ['','/pricing','/about','/results','/reviews','/blog','/faqs','/contact','/privacy','/terms',...treatments.map(x=>`/treatments/${x.slug}`)].map(url=>({url:base+url,lastModified:new Date()}))}
